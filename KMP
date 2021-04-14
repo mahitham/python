@@ -1,0 +1,92 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Welcome To Colaboratory",
+      "provenance": [],
+      "collapsed_sections": [],
+      "toc_visible": true,
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/mahitham/python/blob/master/KMP\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "AuVhcv5lIgIG",
+        "outputId": "5de6a4fa-33fd-4b84-d0c1-9a835124894e",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "source": [
+        "def KMPSearch(p, t):\n",
+        "    M = len(p)\n",
+        "    N = len(t)\n",
+        "    lps = [0]*M\n",
+        "    j = 0\n",
+        "    computeLPSArr(p, M, lps)\n",
+        "    i = 0\n",
+        "    while i < N:\n",
+        "        if p[j] == t[i]:\n",
+        "            i += 1\n",
+        "            j += 1\n",
+        "  \n",
+        "        if j == M:\n",
+        "            print (\"Pattern is found at index \" + str(i-j))\n",
+        "            j = lps[j-1]\n",
+        "  \n",
+        "        elif i < N and p[j] != t[i]:\n",
+        "            if j != 0:\n",
+        "                j = lps[j-1]\n",
+        "            else:\n",
+        "                i += 1\n",
+        "  \n",
+        "def computeLPSArr(p, M, lps):\n",
+        "    len = 0\n",
+        "    lps[0]\n",
+        "    i = 1\n",
+        "    while i < M:\n",
+        "        if p[i]== p[len]:\n",
+        "            len += 1\n",
+        "            lps[i] = len\n",
+        "            i += 1\n",
+        "        else:\n",
+        "            if len != 0:\n",
+        "                len = lps[len-1]\n",
+        "            else:\n",
+        "                lps[i] = 0\n",
+        "                i += 1\n",
+        "  \n",
+        "t = \"ABABDABACDABABCABAB\"\n",
+        "p = \"ABABCABAB\"\n",
+        "KMPSearch(p, t)"
+      ],
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Pattern is found at index 10\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    }
+  ]
+}
